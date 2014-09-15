@@ -1,0 +1,52 @@
+fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    width: 100%;
+    label {
+        ~.checksley-error-list {
+            top: 31px;
+        }
+    }
+}
+
+input[type="text"],
+input[type="number"],
+input[type="password"],
+input[type="email"],
+input[type="date"],
+select,
+textarea {
+    @extend %large;
+    @extend %title;
+    background: $whitish;
+    border: 1px solid $gray-light;
+    color: $grayer;
+    margin: 0;
+    padding: 8px;
+    width: 100%;
+    ::-webkit-input-placeholder {
+        color: $gray-light;
+    }
+}
+input[type="password"] {
+    @extend %title;
+}
+
+textarea {
+    min-height: 10rem;
+    resize: vertical;
+}
+
+.checksley-error-list {
+    @extend %small;
+    margin-bottom: 0;
+    position: absolute;
+    right: 2rem;
+    top: 10px;
+    li {
+        color: $red;
+        padding: .2rem;
+    }
+}

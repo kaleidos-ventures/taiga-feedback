@@ -13,6 +13,7 @@ cache = require("gulp-cached")
 jadeInheritance = require('gulp-jade-inheritance')
 
 paths = {
+    app: "app"
     dist: "dist"
     jade: "app/**/*.jade"
     distStylesPath: "dist/styles"
@@ -29,7 +30,8 @@ paths = {
         "app/vendor/angular/angular.js",
         "app/vendor/angular-route/angular-route.js",
         "app/vendor/angular-sanitize/angular-sanitize.js",
-        "app/vendor/angular-animate/angular-animate.js"
+        "app/vendor/angular-animate/angular-animate.js",
+        "app/vendor/checksley/checksley.js"
     ]
 }
 
@@ -39,13 +41,6 @@ gulp.task "scsslint", ->
         .pipe(scsslint({
             config: "scsslint.yml"
         }))
-
-gulp.task "sass", ["scsslint"], ->
-    gulp.src(paths.sassStylesMain)
-        .pipe(plumber())
-        .pipe(sass())
-        .pipe(rename("app.css"))
-        .pipe(gulp.dest(paths.distStylesPath))
 
 gulp.task "jade", ->
     gulp.src(paths.jade)

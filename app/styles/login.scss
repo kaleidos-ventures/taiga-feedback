@@ -1,0 +1,38 @@
+.login-main {
+    background: url('/images/bg.png') no-repeat scroll center center / cover rgba(0, 0, 0, 0);
+    height: 100vh;
+    .button {
+        color: $white;
+        display: block;
+        margin-bottom: .5rem;
+        text-align: center;
+        &:hover {
+            background: $fresh-taiga;
+        }
+    }
+    fieldset {
+        margin-bottom: 1rem;
+    }
+    .logo,
+    .tagline {
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+    .tagline {
+        @extend %xlarge;
+        @extend %title;
+        color: $white;
+        line-height: 2rem;
+        text-transform: uppercase;
+    }
+    .button-login {
+        line-height: 21px;
+        padding: 7px 40px 6px;
+    }
+    .checksley-error-list {
+        right: 1rem;
+        +.forgot-pass {
+            display: none;
+        }
+    }
+}

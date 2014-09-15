@@ -1,0 +1,23 @@
+@each $font-face in DroidSans, DroidSans-Bold, OpenSans-CondLight-webfont, taiga {
+    @font-face {
+        font-family: '#{$font-face}';
+        src: url('../fonts/#{$font-face}.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/#{$font-face}.woff') format('woff'),
+        url('../fonts/#{$font-face}.ttf')  format('truetype'),
+        url('../fonts/#{$font-face}.svg#{$font-face}') format('svg');
+    }
+}
+
+// __Font Sizes__ //
+%xsmall {font-size: .5rem;}
+%small {font-size: .8rem;}
+%medium {font-size: 1rem;}
+%large {font-size: 1.2rem;}
+%larger {font-size: 1.6rem;}
+%xlarge {font-size: 2rem;}
+%xxlarge {font-size: 3rem;}
+
+%title {font-family: 'OpenSans-CondLight-webfont';}
+%text {font-family: 'DroidSans';}
+%bold {font-family: 'DroidSans-Bold';}
+%taiga {font-family: 'taiga';}

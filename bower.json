@@ -16,7 +16,9 @@
     "angular-route": "1.2.21",
     "angular-animate": "1.2.21",
     "angular-sanitize": "1.2.21",
-    "angular-mocks": "1.2.21"
+    "angular-mocks": "1.2.21",
+    "jquery": "~2.1.1",
+    "checksley": "~0.6.0"
   },
   "private": true
 }

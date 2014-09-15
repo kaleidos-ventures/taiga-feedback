@@ -1,0 +1,16 @@
+div.login-main
+    div.login-container
+        h1.logo
+            img(src="/images/logo.png", alt="TAIGA")
+        p.tagline Your agile, free, and open source project management tool
+
+        div.login-form-container(tg-login)
+            form.login-form
+                fieldset
+                    input(type="text", name="username", ng-model="data.username", data-required="true", placeholder="Username or Email (case sensitive)")
+                fieldset.login-password
+                    input(type="password", name="password", ng-model="data.password", data-required="true",
+                      placeholder="Password (case sensitive)")
+
+                fieldset
+                    a.button.button-login.button-gray(href="", ng-click="ctrl.submit()", title="Sign in") Sign in
