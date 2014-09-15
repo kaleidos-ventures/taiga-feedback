@@ -1,0 +1,22 @@
+{
+  "name": "taiga-feedback",
+  "version": "0.0.1",
+  "license": "AGPL-3.0",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "app/vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "lodash": "~2.4.1",
+    "angular": "1.2.21",
+    "angular-route": "1.2.21",
+    "angular-animate": "1.2.21",
+    "angular-sanitize": "1.2.21",
+    "angular-mocks": "1.2.21"
+  },
+  "private": true
+}
