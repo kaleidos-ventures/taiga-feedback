@@ -40,3 +40,10 @@ a.button-gray {
         color: $white;
     }
 }
+
+h1 {
+    @extend %title;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}

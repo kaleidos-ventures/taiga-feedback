@@ -2,6 +2,7 @@
 
 configure = ($routeProvider, $locationProvider) ->
     $routeProvider.when("/login", {templateUrl: "partials/login.html"})
+    $routeProvider.when("/", {templateUrl: "partials/feedback.html"})
 
     $locationProvider.html5Mode(true)
 

@@ -1,0 +1,8 @@
+div.feedback(tg-feedback)
+    h1 Send feedback
+    form
+        fieldset
+            textarea(ng-model="data.feedback", data-required="true", placeholder="feedback")
+
+        fieldset
+            a.button.button-submit.button-green(href="", title="Submit") Submit

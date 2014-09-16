@@ -5,17 +5,17 @@ module = angular.module("taiga")
 class AuthService
     @.$inject = ["$rootScope",
                  "$tgStorage",
-                 "urls"]
+                 "urls",
+                 "$http"]
 
-    constructor: (@rootscope, @storage, @urls) ->
+    constructor: (@rootscope, @storage, @urls, @http) ->
 
     getUser: ->
         if @rootscope.user
             return @rootscope.user
 
-        userData = @storage.get("userInfo")
+        user = @storage.get("userInfo")
         if userData
-            user = @model.make_model("users", userData)
             @rootscope.user = user
             return user
 
@@ -23,7 +23,7 @@ class AuthService
 
     setUser: (user) ->
         @rootscope.auth = user
-        @storage.set("userInfo", user.getAttrs())
+        @storage.set("userInfo", user)
         @rootscope.user = user
 
     clear: ->
@@ -45,10 +45,8 @@ class AuthService
             return true
         return false
 
-    ## Http interface
-
     login: (data, type) ->
-        url = @urls["auth"]
+        url = @urls.get("auth")
 
         data = _.clone(data, false)
         data.type = if type then type else "normal"
@@ -56,7 +54,7 @@ class AuthService
         @.removeToken()
 
         return @http.post(url, data).then (data, status) =>
-            user = @model.make_model("users", data.data)
+            user = data.data
             @.setToken(user.auth_token)
             @.setUser(user)
             return user
@@ -64,22 +62,6 @@ class AuthService
     logout: ->
         @.removeToken()
         @.clear()
-
-    register: (data, type, existing) ->
-        url = @urls.resolve("auth-register")
-
-        data = _.clone(data, false)
-        data.type = if type then type else "public"
-        if type == "private"
-            data.existing = if existing then existing else false
-
-        @.removeToken()
-
-        return @http.post(url, data).then (response) =>
-            user = @model.make_model("users", response.data)
-            @.setToken(user.auth_token)
-            @.setUser(user)
-            return user
 
 module.service("$tgAuth", AuthService)
 
