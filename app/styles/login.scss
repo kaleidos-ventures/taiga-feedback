@@ -1,6 +1,11 @@
 .login-main {
     background: url('/images/bg.png') no-repeat scroll center center / cover rgba(0, 0, 0, 0);
     height: 100vh;
+    padding: 20px;
+    .login-container {
+        margin: 0 auto;
+        width: 400px;
+    }
     .button {
         color: $white;
         display: block;

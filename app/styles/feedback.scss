@@ -1,6 +1,40 @@
 .feedback {
+    max-height: 600px;
+    overflow: auto;
     padding: 20px;
     fieldset {
         margin-bottom: 10px;
+    }
+    .image {
+        img {
+            width: 100%;
+        }
+    }
+    .button-capture {
+        color: $white;
+        display: block;
+        float: right;
+        margin-bottom: .5rem;
+        text-align: center;
+        &:hover {
+            background: $fresh-taiga;
+        }
+    }
+}
+
+.notification-message-success {
+    background: rgba($fresh-taiga, .9);
+    margin-bottom: 15px;
+    padding: 0 15px;
+    .icon-notification-success {
+        @extend %xxlarge;
+        display: inline;
+        vertical-align: sub;
+    }
+    .warning {
+        @extend %large;
+        @extend %bold;
+        color: $white;
+        line-height: 2.4rem;
     }
 }

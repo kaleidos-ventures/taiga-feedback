@@ -2,9 +2,25 @@ taiga = @.taiga
 
 module = angular.module("taiga")
 
+class FeedbackController
+    @.$inject = [
+        "$tgAuth",
+        "$location"
+    ]
+    constructor: (@auth, @location) ->
+        if !@auth.isAuthenticated()
+            @location.path("/login")
+
+module.controller("FeedbackController", FeedbackController)
+
 FeedbackDirective = (@urls, @http) ->
     link = ($scope, $el, $attrs) ->
+        $scope.ok = false
         $scope.data = {}
+
+        onSuccessSubmit = () ->
+            $scope.data = {}
+            $scope.ok = true
 
         submit = ->
             form = $el.find("form").checksley()
@@ -13,14 +29,25 @@ FeedbackDirective = (@urls, @http) ->
 
             url = @urls.get("feedback")
 
+            onSuccessSubmit()
+
             @http.post(url, $scope.data)
             .then (data, status) =>
-                console.log "kkk"
+                onSuccessSubmit()
 
+        $el.on "click", ".new-feedback", (event) ->
+            $scope.ok = false
+            $scope.$apply()
+
+        $el.on "click", "a.button-capture", (event) ->
+            chrome.tabs.captureVisibleTab null, {}, (src) =>
+                $scope.data.image = src
+                $scope.$apply()
 
         $el.on "click", "a.button-submit", (event) ->
             event.preventDefault()
             submit()
+
 
         $el.on "submit", "form", (event) ->
             event.preventDefault()

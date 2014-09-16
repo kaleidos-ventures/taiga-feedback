@@ -1,0 +1,18 @@
+{
+    "manifest_version": 2,
+    "name": "TaigaFeedback",
+    "description": "",
+    "version": "1.0",
+    "permissions": [
+        "<all_urls>",
+        "tabs"
+    ],
+    "web_accessible_resources": [
+        "images/icon-taiga-color-128.png"
+    ],
+    "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+    "browser_action": {
+        "default_icon": "images/icon-taiga-color-128.png",
+        "default_popup": "index.html"
+    }
+}

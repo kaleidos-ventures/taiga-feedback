@@ -15,7 +15,7 @@ class AuthService
             return @rootscope.user
 
         user = @storage.get("userInfo")
-        if userData
+        if user
             @rootscope.user = user
             return user
 

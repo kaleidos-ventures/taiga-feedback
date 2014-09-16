@@ -31,7 +31,8 @@ paths = {
         "app/vendor/angular-route/angular-route.js",
         "app/vendor/angular-sanitize/angular-sanitize.js",
         "app/vendor/angular-animate/angular-animate.js",
-        "app/vendor/checksley/checksley.js"
+        "app/vendor/checksley/checksley.js",
+        "app/vendor/cropit/dist/jquery.cropit.js"
     ]
 }
 
@@ -76,6 +77,9 @@ gulp.task "copy",  ->
 
     gulp.src("#{paths.app}/images/**/*")
         .pipe(gulp.dest("#{paths.dist}/images/"))
+
+    gulp.src("manifest.json")
+        .pipe(gulp.dest("#{paths.dist}/"))
 
 gulp.task "express", ->
     express = require("express")

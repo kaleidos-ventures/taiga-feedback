@@ -1,3 +1,7 @@
+body {
+    width: 800px;
+}
+
 .button {
     @extend %medium;
     @extend %title;
@@ -11,7 +15,6 @@
         transition: background .3s linear;
     }
     .icon {
-
         margin-right: .3rem;
     }
 }

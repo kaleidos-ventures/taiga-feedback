@@ -21,3 +21,29 @@
 %text {font-family: 'DroidSans';}
 %bold {font-family: 'DroidSans-Bold';}
 %taiga {font-family: 'taiga';}
+
+[data-icon]:before {
+    content: attr(data-icon);
+    font-family: 'taiga' !important;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-style: normal !important;
+    font-variant: normal !important;
+    font-weight: normal !important;
+    line-height: 1;
+    speak: none;
+    text-transform: none !important;
+}
+
+[class^='icon-']:before,
+[class*=' icon-']:before {
+    font-family: 'taiga' !important;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-style: normal !important;
+    font-variant: normal !important;
+    font-weight: normal !important;
+    line-height: 1;
+    speak: none;
+    text-transform: none !important;
+}

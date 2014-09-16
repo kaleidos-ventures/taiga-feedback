@@ -1,8 +1,24 @@
 div.feedback(tg-feedback)
-    h1 Send feedback
-    form
-        fieldset
-            textarea(ng-model="data.feedback", data-required="true", placeholder="feedback")
+    div(ng-show="ok")
+        div.notification-message.notification-message-success
+           div.icon.icon-notification-success.icon-backlog
+           div.text
+               h4.warning Everything is ok
 
-        fieldset
-            a.button.button-submit.button-green(href="", title="Submit") Submit
+        a.button.new-feedback.button-green(href="", title="New feedback") New feedback
+
+    div(ng-show="!ok")
+        h1 Send feedback
+
+        form(ng-controller="FeedbackController as ctrl")
+            fieldset.image(ng-show="data.image")
+                img(ng-src="{{data.image}}")
+
+            fieldset
+                a.button.button-capture.button-gray(href="", title="Capture") Capture
+
+            fieldset
+                textarea(ng-model="data.feedback", data-required="true", placeholder="feedback")
+
+            fieldset
+                a.button.button-submit.button-green(href="", title="Submit") Submit
