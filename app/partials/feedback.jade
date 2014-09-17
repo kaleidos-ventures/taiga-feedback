@@ -18,7 +18,12 @@ div.feedback(tg-feedback)
                 a.button.button-capture.button-gray(href="", title="Capture") Capture
 
             fieldset
-                textarea(ng-model="data.feedback", data-required="true", placeholder="feedback")
+                select(ng-model="data.type")
+                    option(value="0") Bug
+                    option(value="1") Enhancement
+
+            fieldset
+                textarea(ng-model="data.description", data-required="true", placeholder="feedback")
 
             fieldset
                 a.button.button-submit.button-green(href="", title="Submit") Submit

@@ -17,6 +17,7 @@ FeedbackDirective = (@urls, @http) ->
     link = ($scope, $el, $attrs) ->
         $scope.ok = false
         $scope.data = {}
+        $scope.data.type = 0;
 
         onSuccessSubmit = () ->
             $scope.data = {}
@@ -29,7 +30,7 @@ FeedbackDirective = (@urls, @http) ->
 
             url = @urls.get("feedback")
 
-            onSuccessSubmit()
+            console.log $scope
 
             @http.post(url, $scope.data)
             .then (data, status) =>
