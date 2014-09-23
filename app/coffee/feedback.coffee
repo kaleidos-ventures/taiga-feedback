@@ -17,7 +17,8 @@ FeedbackDirective = (@urls, @http) ->
     link = ($scope, $el, $attrs) ->
         $scope.ok = false
         $scope.data = {}
-        $scope.data.type = 0;
+        $scope.data.type = 1
+        $scope.data.attached_file = null
 
         onSuccessSubmit = () ->
             $scope.data = {}
@@ -30,8 +31,6 @@ FeedbackDirective = (@urls, @http) ->
 
             url = @urls.get("feedback")
 
-            console.log $scope
-
             @http.post(url, $scope.data)
             .then (data, status) =>
                 onSuccessSubmit()
@@ -42,7 +41,7 @@ FeedbackDirective = (@urls, @http) ->
 
         $el.on "click", "a.button-capture", (event) ->
             chrome.tabs.captureVisibleTab null, {}, (src) =>
-                $scope.data.image = src
+                $scope.data.attached_file = src
                 $scope.$apply()
 
         $el.on "click", "a.button-submit", (event) ->

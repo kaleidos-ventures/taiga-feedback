@@ -11,19 +11,19 @@ div.feedback(tg-feedback)
         h1 Send feedback
 
         form(ng-controller="FeedbackController as ctrl")
-            fieldset.image(ng-show="data.image")
-                img(ng-src="{{data.image}}")
+            fieldset.image(ng-show="data.attached_file")
+                img(ng-src="{{data.attached_file}}")
 
             fieldset
                 a.button.button-capture.button-gray(href="", title="Capture") Capture
 
             fieldset
-                select(ng-model="data.type")
-                    option(value="0") Bug
-                    option(value="1") Enhancement
+                select(name="type", ng-model="data.type")
+                    option(value="1") Bug
+                    option(value="3") Enhancement
 
             fieldset
-                textarea(ng-model="data.description", data-required="true", placeholder="feedback")
+                textarea(name="description", ng-model="data.description", data-required="true", placeholder="feedback")
 
             fieldset
                 a.button.button-submit.button-green(href="", title="Submit") Submit
