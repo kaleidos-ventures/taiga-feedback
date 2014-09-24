@@ -6,6 +6,7 @@ angular.module("taiga").factory('urls', () ->
     urls = {
         "auth": "/api/v1/auth"
         "feedback": "/api/v1/feedback"
+        "feedbackTypes": "/api/v1/feedback_types"
     }
 
     get = (name) => host + urls[name]

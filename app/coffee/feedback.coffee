@@ -17,11 +17,21 @@ FeedbackDirective = (@urls, @http) ->
     link = ($scope, $el, $attrs) ->
         $scope.ok = false
         $scope.data = {}
-        $scope.data.type = 1
+        $scope.data.type = null
         $scope.data.attached_file = null
+        $scope.data.subject = "Feedback from Chrome plugin"
+        $scope.feedbackTypes = []
+        feedbackTypes = null
+
+        feedbackTypesUrl = @urls.get("feedbackTypes")
+        @http.get(feedbackTypesUrl).then (feedbackTypes, status) =>
+            $scope.feedbackTypes = feedbackTypes.data.results
+            $scope.data.type = feedbackTypes.data.results[0].id
 
         onSuccessSubmit = () ->
-            $scope.data = {}
+            $scope.data.type = $scope.feedbackTypes[0].id
+            $scope.data.attached_file = null
+            $scope.data.description = ""
             $scope.ok = true
 
         submit = ->
