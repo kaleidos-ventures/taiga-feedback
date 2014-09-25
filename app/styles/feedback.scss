@@ -22,8 +22,13 @@
     }
 }
 
-.notification-message-success {
-    background: rgba($fresh-taiga, .9);
+.notification-message {
+    &.success{
+        background: rgba($fresh-taiga, .9);
+    }
+    &.error{
+        background: rgba($red, .9);
+    }    
     margin-bottom: 15px;
     padding: 0 15px;
     .icon-notification-success {

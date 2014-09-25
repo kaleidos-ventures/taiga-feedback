@@ -13,18 +13,21 @@ class FeedbackController
 
 module.controller("FeedbackController", FeedbackController)
 
-FeedbackDirective = (@urls, @http) ->
+FeedbackDirective = (@urls, @http, @auth) ->
     link = ($scope, $el, $attrs) ->
-        $scope.ok = false
+        $scope.showOkMessage = false
+        $scope.showErrorMessage = false
         $scope.data = {}
         $scope.data.type = null
         $scope.data.attached_file = null
         $scope.data.subject = "Feedback from Chrome plugin"
         $scope.feedbackTypes = []
         feedbackTypes = null
-
         feedbackTypesUrl = @urls.get("feedbackTypes")
-        @http.get(feedbackTypesUrl).then (feedbackTypes, status) =>
+        token = @auth.getToken()
+
+        @http.get(feedbackTypesUrl, {headers: {"Authorization":"Bearer #{token}"}})
+        .then (feedbackTypes, status) =>
             $scope.feedbackTypes = feedbackTypes.data.results
             $scope.data.type = feedbackTypes.data.results[0].id
 
@@ -32,7 +35,12 @@ FeedbackDirective = (@urls, @http) ->
             $scope.data.type = $scope.feedbackTypes[0].id
             $scope.data.attached_file = null
             $scope.data.description = ""
-            $scope.ok = true
+            $scope.showOkMessage = true
+            $scope.showErrorMessage = false
+
+        onErrorSubmit = () ->
+            $scope.showOkMessage = false
+            $scope.showErrorMessage = true
 
         submit = ->
             form = $el.find("form").checksley()
@@ -41,12 +49,15 @@ FeedbackDirective = (@urls, @http) ->
 
             url = @urls.get("feedback")
 
-            @http.post(url, $scope.data)
-            .then (data, status) =>
+            @http.post(url, $scope.data, {headers: {"Authorization":"Bearer #{token}"}})
+            .success (data, status) =>
                 onSuccessSubmit()
+            .error (data, status) =>
+                onErrorSubmit()
 
         $el.on "click", ".new-feedback", (event) ->
-            $scope.ok = false
+            $scope.showOkMessage = false
+            $scope.showErrorMessage = false
             $scope.$apply()
 
         $el.on "click", "a.button-capture", (event) ->
@@ -65,4 +76,4 @@ FeedbackDirective = (@urls, @http) ->
 
     return {link:link}
 
-module.directive("tgFeedback", ["urls", "$http", FeedbackDirective])
+module.directive("tgFeedback", ["urls", "$http", "$tgAuth", FeedbackDirective])

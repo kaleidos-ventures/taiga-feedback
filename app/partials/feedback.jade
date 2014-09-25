@@ -1,13 +1,21 @@
 div.feedback(tg-feedback)
-    div(ng-show="ok")
-        div.notification-message.notification-message-success
+    div(ng-show="showOkMessage")
+        div.notification-message.success
            div.icon.icon-notification-success.icon-backlog
            div.text
                h4.warning Everything is ok
 
         a.button.new-feedback.button-green(href="", title="New feedback") New feedback
 
-    div(ng-show="!ok")
+    div(ng-show="showErrorMessage")
+        div.notification-message.error
+           div.icon.icon-notification-success.icon-backlog
+           div.text
+               h4.warning Something went wrong
+
+        a.button.new-feedback.button-green(href="", title="Try again") Try again
+
+    div(ng-show="!showOkMessage && !showErrorMessage")
         h1 Send feedback
 
         form(ng-controller="FeedbackController as ctrl")
