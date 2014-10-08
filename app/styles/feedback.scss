@@ -2,6 +2,7 @@
     max-height: 600px;
     overflow: auto;
     padding: 20px;
+    position: relative;
     fieldset {
         margin-bottom: 10px;
     }
@@ -20,17 +21,26 @@
             background: $fresh-taiga;
         }
     }
+    .logout {
+        font-size: 12px;
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        &:hover {
+            color: $red-light;
+        }
+    }
 }
 
 .notification-message {
-    &.success{
-        background: rgba($fresh-taiga, .9);
-    }
-    &.error{
-        background: rgba($red, .9);
-    }    
     margin-bottom: 15px;
     padding: 0 15px;
+    &.success {
+        background: rgba($fresh-taiga, .9);
+    }
+    &.error {
+        background: rgba($red, .9);
+    }
     .icon-notification-success {
         @extend %xxlarge;
         display: inline;

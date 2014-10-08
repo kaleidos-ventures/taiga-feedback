@@ -13,7 +13,7 @@ class FeedbackController
 
 module.controller("FeedbackController", FeedbackController)
 
-FeedbackDirective = (@urls, @http, @auth) ->
+FeedbackDirective = ($urls, $http, $auth, $location) ->
     link = ($scope, $el, $attrs) ->
         $scope.showOkMessage = false
         $scope.showErrorMessage = false
@@ -23,10 +23,10 @@ FeedbackDirective = (@urls, @http, @auth) ->
         $scope.data.subject = "Feedback from Chrome plugin"
         $scope.feedbackTypes = []
         feedbackTypes = null
-        feedbackTypesUrl = @urls.get("feedbackTypes")
-        token = @auth.getToken()
+        feedbackTypesUrl = $urls.get("feedbackTypes")
+        token = $auth.getToken()
 
-        @http.get(feedbackTypesUrl, {headers: {"Authorization":"Bearer #{token}"}})
+        $http.get(feedbackTypesUrl, {headers: {"Authorization":"Bearer #{token}"}})
         .then (feedbackTypes, status) =>
             $scope.feedbackTypes = feedbackTypes.data.results
             $scope.data.type = feedbackTypes.data.results[0].id
@@ -47,9 +47,9 @@ FeedbackDirective = (@urls, @http, @auth) ->
             if not form.validate()
                 return
 
-            url = @urls.get("feedback")
+            url = $urls.get("feedback")
 
-            @http.post(url, $scope.data, {headers: {"Authorization":"Bearer #{token}"}})
+            $http.post(url, $scope.data, {headers: {"Authorization":"Bearer #{token}"}})
             .success (data, status) =>
                 onSuccessSubmit()
             .error (data, status) =>
@@ -69,11 +69,17 @@ FeedbackDirective = (@urls, @http, @auth) ->
             event.preventDefault()
             submit()
 
-
         $el.on "submit", "form", (event) ->
             event.preventDefault()
             submit()
 
+        $el.on "click", "a.logout", (event) ->
+            event.preventDefault()
+
+            $auth.clear()
+            $location.path("/login")
+            $scope.$apply();
+
     return {link:link}
 
-module.directive("tgFeedback", ["urls", "$http", "$tgAuth", FeedbackDirective])
+module.directive("tgFeedback", ["urls", "$http", "$tgAuth", "$location", FeedbackDirective])
